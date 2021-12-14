@@ -38,18 +38,45 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+            <!-- LEZIONE 183 Escludo Junit4 per lavorare con JUnit5 -->
+            <!--
+            SpringBoot internamente usa Junit4
+            che richiede la dipendenza vintage
+            e Le dipendenze di Junit5 si trovano nel pom principale
+            Quindi non e' necessario specificare la versione
+
+            Aggiungo artifactId junit oltre a groupId
+            Questo dice che il test di avvio molla-molla
+            Quando SpringBoot saraì passato defintivamente a Junit5
+            abbandonando Junit4 non sara' piu' necessario
+            -->
             <exclusions>
                 <exclusion>
                     <groupId>junit</groupId>
                     <artifactId>junit</artifactId>
                 </exclusion>
             </exclusions>
+            <!-- LEZIONE 183 Escludo Junit4 per lavorare con JUnit5 -->
         </dependency>
+        <!-- LEZIONE 183 Escludo Junit4 per lavorare con JUnit5 -->
+        <!--
+        Usate da Junit5 per i test unitari
+        La versione non viene specificata
+        perche' ereditata da spring-boot-starter-test
+        -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
             <scope>test</scope>
         </dependency>
+        <!--
+        Usato da Junit5 per consentine
+        al plugin maven-surfire di funzionare
+        correttamente nell'ambito delle dipendenze
+        dei test
+        La versione non viene specificata
+        perche' ereditata da spring-boot-starter-test
+        -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>

@@ -77,18 +77,45 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+            <!-- LEZIONE 183 Escludo Junit4 per lavorare con JUnit5 -->
+            <!--
+            SpringBoot internamente usa Junit4
+            che richiede la dipendenza vintage
+            e Le dipendenze di Junit5 si trovano nel pom principale
+            Quindi non e' necessario specificare la versione
+
+            Aggiungo artifactId junit oltre a groupId
+            Questo dice che il test di avvio molla-molla
+            Quando SpringBoot saraì passato defintivamente a Junit5
+            abbandonando Junit4 non sara' piu' necessario
+            -->
             <exclusions>
                 <exclusion>
                     <groupId>junit</groupId>
                     <artifactId>junit</artifactId>
                 </exclusion>
             </exclusions>
+            <!-- LEZIONE 183 Escludo Junit4 per lavorare con JUnit5 -->
         </dependency>
+        <!-- LEZIONE 183 Escludo Junit4 per lavorare con JUnit5 -->
+        <!--
+        Usato da Junit5 per i test unitari
+        La versione non viene specificata
+        perche' ereditata da spring-boot-starter-test
+        -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
             <scope>test</scope>
         </dependency>
+        <!--
+        Usato da Junit5 per consentine
+        al plugin maven-surfire di funzionare
+        correttamente nell'ambito delle dipendenze
+        dei test
+        La versione non viene specificata
+        perche' ereditata da spring-boot-starter-test
+        -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
@@ -100,10 +127,12 @@
             <version>2.22.0</version>
             <scope>test</scope>
         </dependency>
+        <!-- LEZIONE 183 Escludo Junit4 per lavorare con JUnit5 -->
     </dependencies>
 
     <build>
         <plugins>
+            <!--
             <plugin>
                 <groupId>ro.isdc.wro4j</groupId>
                 <artifactId>wro4j-maven-plugin</artifactId>
@@ -124,15 +153,7 @@
                     <extraConfigFile>${basedir}/src/main/wro/wro.properties</extraConfigFile>
                     <contextFolder>${basedir}/src/main/less</contextFolder>
                 </configuration>
-                <!--
-                <configuration>
-                    <wroManagerFactory>ro.isdc.wro.maven.plugin.manager.factory.ConfigurableWroManagerFactory</wroManagerFactory>
-                    <cssDestinationFolder>${basedir}/pet-clinic-web/classes/static/resources/css</cssDestinationFolder>
-                    <wroFile>{basedir}/pet-clinic-web/src/main/wro/wro.xml</wroFile>
-                    <extraConfigFile>{basedir}/pet-clinic-web/src/main/wro/wro.properties</extraConfigFile>
-                    <contextFolder>{basedir}/pet-clinic-web/src/main/less</contextFolder>
-                </configuration>
-                -->
+
                 <dependencies>
                     <dependency>
                         <groupId>org.webjars</groupId>
@@ -146,6 +167,22 @@
                     </dependency>
                 </dependencies>
             </plugin>
+            -->
+            <!-- LEZIONE 183 Escludo Junit4 per lavorare con JUnit5 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.12.4</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.junit.platform</groupId>
+                        <artifactId>junit-platform-surefire-provider</artifactId>
+                        <scope>test</scope>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            <!-- LEZIONE 183 Escludo Junit4 per lavorare con JUnit5 -->
         </plugins>
+
     </build>
 </project>
