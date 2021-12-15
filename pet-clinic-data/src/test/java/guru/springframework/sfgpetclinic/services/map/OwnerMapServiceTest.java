@@ -13,7 +13,10 @@ import static org.junit.jupiter.api.Assertions.*;
 // Testiamo l'implementazione della HashMap dei
 // proprietari che al suo interno usa i servizi
 // Dedicati ad animali e tipi di animali
+// Vediamo come impostare il codice di Junit5
+// Inizio con tasto + generate + test sul nome della classe
 // Testo tutte le operazioni Crud del servizio
+
 class OwnerMapServiceTest {
 
     // LEZIONE 185

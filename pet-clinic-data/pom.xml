@@ -82,12 +82,15 @@
             <artifactId>junit-jupiter-engine</artifactId>
             <scope>test</scope>
         </dependency>
+        <!-- LEZIONE 186 Aggiungo Mockito per farlo lavorare con JUnit5 -->
+        <!-- potrebbe non essere nel pom del genitore e quindi lo inserisco -->
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-junit-jupiter</artifactId>
             <version>2.22.0</version>
             <scope>test</scope>
         </dependency>
+        <!-- LEZIONE 186 Aggiungo Mockito per farlo lavorare con JUnit5 -->
     </dependencies>
 
     <build>

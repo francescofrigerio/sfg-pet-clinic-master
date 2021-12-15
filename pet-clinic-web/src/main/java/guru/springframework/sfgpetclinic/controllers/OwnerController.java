@@ -23,21 +23,44 @@ public class OwnerController {
     private final OwnerService ownerService;
 
     public OwnerController(OwnerService ownerService) {
+
         this.ownerService = ownerService;
     }
 
     @InitBinder
     public void setAllowedFields(WebDataBinder dataBinder) {
+
         dataBinder.setDisallowedFields("id");
+    }
+
+    // LEZIONE 187
+    //@RequestMapping("/list")
+    //@RequestMapping("/index")
+    //@RequestMapping("/") KO
+    @RequestMapping("/list")
+    public String listOwners(Model model){
+
+        System.out.println("Start listOwners ");
+        model.addAttribute("owners",ownerService.findAll());
+        return "owners/index";
+
     }
 
     @RequestMapping("/find")
     public String findOwners(Model model){
         // LEZIONE 127
-        //model.addAttribute("owner", Owner.builder().build());
-        //return "owners/findOwners";
-        return "notimplemented";
+        //return "notimplemented";
         // LEZIONE 127
+        // LEZIONE 187
+        boolean isLessons187 = true ;
+        if (isLessons187) {
+            model.addAttribute("owners", Owner.builder().build());
+            return "owners/findOwners";
+
+        }
+        else
+            return "notimplemented";
+
     }
 
     @GetMapping
