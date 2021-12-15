@@ -1,7 +1,7 @@
 # Java Maven CircleCI 2.0 configuration file
 #
 # Check https://circleci.com/docs/2.0/language-java/ for more details
-#
+# la build verra eseguiota all'interno di um docker container
 version: 2
 jobs:
     build:
@@ -24,6 +24,8 @@ jobs:
         - checkout
 
         # Download and cache dependencies
+        # CircleCI ha la capacita di memorizzare
+        # in una cache le dipendenze
         - restore_cache:
               keys:
               - v1-dependencies-{{ checksum "pom.xml" }}
@@ -32,12 +34,19 @@ jobs:
 
         - run: mvn install -DskipTests
 
+        #mvn dipendenze offline dice di andare
+        #andare a prendere tutte le dipendenze
         - run: mvn dependency:go-offline
 
+        # Possiamo salvare la cache
+        #e avere l'elenco delle dipendenze in  modo relativo
         - save_cache:
               paths:
               - ~/.m2
               key: v1-dependencies-{{ checksum "pom.xml" }}
 
         # run tests!
+        # eseguo i test d'integrazione e quelli unitari
+        # questo comando puo' essere personalizzato
+        # per progetti semplici e' piu' che sufficiente
         - run: mvn integration-test
