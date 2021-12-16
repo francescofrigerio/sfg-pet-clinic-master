@@ -81,6 +81,7 @@ class OwnerControllerTest {
     @Test
     void listOwners() throws Exception{
 
+        System.out.println("listOwners Start ");
         // PEr testare il metodo listOwners
         // del Mock Controller devo passare in input
         // Un oggetto model che è aspettato per entrare
@@ -110,6 +111,7 @@ class OwnerControllerTest {
     @Test
     void listOwnersByIndex() throws Exception{
 
+        System.out.println("listOwnersByIndex Start ");
         when(ownerService.findAll()).thenReturn(owners);
 
         mockMvc.perform(get("/owners/index"))
