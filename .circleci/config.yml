@@ -32,20 +32,34 @@ jobs:
         # Download and cache dependencies
         # CircleCI ha la capacita di memorizzare
         # in una cache le dipendenze
+        # Ripristina la cache dal checksum sul pom
         - restore_cache:
               keys:
               - v1-dependencies-{{ checksum "pom.xml" }}
               # fallback to using the latest cache if no exact match is found
               - v1-dependencies-
 
+        # Modifica per non dare errore su Circle
+        # Necessita di piu' passaggi prima solo la build
+        # saltando i test
+        # Installazione di esecuzione che installa
+        # i moduli nella cache Maven
+        # ma salta i test che saranno eseguiti in fondo
+        # Il tutto è dovuto al fatto di avere 2 moduli
+        # in cui il modulo web ha bisogno del modulo data
+        # ma maven di default non guarda il nostro codice
+        # ma guarda soltanto il contenuto della cache maven .m2
         - run: mvn install -DskipTests
 
         #mvn dipendenze offline dice di andare
         #andare a prendere tutte le dipendenze
+        # a volte dopo la modifica puo non funzionare
+        # lo stesso probabilmente perche' si va offline
         - run: mvn dependency:go-offline
 
         # Possiamo salvare la cache
         #e avere l'elenco delle dipendenze in  modo relativo
+        # .m2 e la directory locale dove contenere la cache
         - save_cache:
               paths:
               - ~/.m2
@@ -55,4 +69,9 @@ jobs:
         # eseguo i test d'integrazione e quelli unitari
         # questo comando puo' essere personalizzato
         # per progetti semplici e' piu' che sufficiente
+        # Da verificare con java8 essendo un progetto
+        # Multi Modulo potrebbe servire installare maven sotto la cache
+        # quindi in caso di errori modificare la seguente riga
+        # run: mvn install (forse basta skip test fatto sopra sopra)
+        # - run: mvn install
         - run: mvn integration-test
