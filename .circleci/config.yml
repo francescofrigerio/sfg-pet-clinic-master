@@ -49,7 +49,7 @@ jobs:
         # in cui il modulo web ha bisogno del modulo data
         # ma maven di default non guarda il nostro codice
         # ma guarda soltanto il contenuto della cache maven .m2
-        - run: mvn generate-resources
+        #- run: mvn generate-resources
         - run: mvn install -DskipTests
 
         #mvn dipendenze offline dice di andare
