@@ -46,6 +46,16 @@ public class OwnerController {
 
     }
 
+    // Nonn riesco a farli funzionare insieme
+    @RequestMapping("/index")
+    public String listOwnersByIndex(Model model){
+
+        System.out.println("Start listOwnersByIndex ");
+        model.addAttribute("owners",ownerService.findAll());
+        return "owners/index";
+
+    }
+
     @RequestMapping("/find")
     public String findOwners(Model model){
         // LEZIONE 127
