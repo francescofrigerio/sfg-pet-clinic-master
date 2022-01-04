@@ -64,6 +64,13 @@ public class OwnerController {
         // LEZIONE 187
         boolean isLessons187 = true ;
         if (isLessons187) {
+            // APPUNTI LEZIONE 213
+            // Model and view restituiti sono
+            // come un oggetto composito
+            // dal modello e la stringa del percorso
+            // che coincide con il nome della vista
+            // Tecnica molto simile è quella di iniettare
+            // il modello nel controller
             model.addAttribute("owners", Owner.builder().build());
             return "owners/findOwners";
 
@@ -98,12 +105,19 @@ public class OwnerController {
         }
     }
 
+    // LEZIONE 213
+    // IL PROPRIETARIO E' GIA MAPPATO
     @GetMapping("/{ownerId}")
     public ModelAndView showOwner(@PathVariable Long ownerId) {
         ModelAndView mav = new ModelAndView("owners/ownerDetails");
+        // Recuperiamo il proprietario partendo
+        // dal valore del suo ID come Long e non intero
+        // a differenza del codice originale fornito da Spring
+        // tornando al dettaglio dello stesso
         mav.addObject(ownerService.findById(ownerId));
         return mav;
     }
+    // LEZIONE 213
 
     @GetMapping("/new")
     public String initCreationForm(Model model) {

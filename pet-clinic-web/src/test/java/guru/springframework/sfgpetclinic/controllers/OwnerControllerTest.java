@@ -170,16 +170,31 @@ class OwnerControllerTest {
                 .andExpect(model().attribute("selections", hasSize(2)));;
     }
 
+    // LEZIONE 213
     @Test
     void displayOwner() throws Exception {
+        // Prepariamo Mockito x ritornae un oggetto
+        // proprietario usando il costruttore dell'oggetto Owner
         when(ownerService.findById(anyLong())).thenReturn(Owner.builder().id(1l).build());
 
+        // Testiamo il tutto accedendo al percorso esposto
+        // dal controller aspettando un OK come risultato
+        // e come output il path della vista di Dettaglio
+        // e il modello avente come proprieta un proprietario
+        // avente id=1L
+        // L'ultima riga è quella piu' complessa
+        // Prima invece di usare hasProperty
+        // veniva usato IsNotNull è andava in errore
+        // Mi sto assicurabdi che Il modello ritornato
+        // indietro dal controller ha un attributo chiamato owner
+        // che ha la proprieta indicata subito dopo
+        // cioè ha un id lungo 1
         mockMvc.perform(get("/owners/123"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("owners/ownerDetails"))
                 .andExpect(model().attribute("owner", hasProperty("id", is(1l))));
     }
-
+    // LEZIONE 213
 
     @Test
     void initCreationForm() throws Exception {

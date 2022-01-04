@@ -70,6 +70,9 @@ public class Pet extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "type_id")
     private PetType petType;
+    // ATTENZIONE CHE NEL PROGETTI Spring
+    // originale il campo si chiama type
+    // LEZIONE 214
 
     // LEZIONE 147
     // OGNI ANIMALE AVRA' IL SUO PROPRIETARIO
@@ -118,5 +121,9 @@ public class Pet extends BaseEntity {
     // COLLEGATA
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pet")
     private Set<Visit> visits = new HashSet<>();
+    // ATTENZIONE AL NOME DEL CAMPO
+    // DIVERSO RISPETTO AL PROGETTO
+    // TEMPLATE DI SPRING
+    // LEZIONE 214
 
 }

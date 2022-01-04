@@ -42,8 +42,15 @@ public class PetType extends BaseEntity {
     private String name;
 
 
+    // LEZIONE 214 Viene aggiunto
+    // il metodo toString per allinearsi
+    // al progetto template di Spring
+    // da cui sono state prese le pagine web
+    // altrimenti non si vede nella pagina OwnersDetail
+    // Il nome dell'oggetto PetType
     @Override
     public String toString() {
+
         return name;
     }
 }
